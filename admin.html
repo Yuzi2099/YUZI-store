@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Admin Panel - YUZI Store</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="box">
+<h2>Admin Panel</h2>
+<div id="orders"></div>
+</div>
+
+<script>
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+let output = "";
+
+orders.forEach((o, i) => {
+output += `
+<p>
+<b>${o.username}</b> - ${o.robux} Robux
+<br>Status: ${o.status}
+<br>
+<button onclick="done(${i})">Selesai</button>
+</p><hr>`;
+});
+
+document.getElementById("orders").innerHTML = output;
+
+function done(i){
+orders[i].status = "Selesai";
+localStorage.setItem("orders", JSON.stringify(orders));
+location.reload();
+}
+</script>
+
+</body>
+</html>
